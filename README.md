@@ -15,8 +15,6 @@ Unlike ML-based approaches, this method is fully classical and deterministic. It
 
 The system is optimized for performance and designed to integrate into real-time video processing pipelines.
 
----
-
 ## Key Features
 
 * Real-time contrast object detection in sky regions
@@ -24,15 +22,11 @@ The system is optimized for performance and designed to integrate into real-time
 * No machine learning dependencies
 * Fully deterministic behavior
 
----
-
 ## Algorithm Pipeline
 
 ### 1. Grayscale Conversion
 
 Input frames are converted from BGR to grayscale to reduce computational cost and simplify gradient computation.
-
----
 
 ### 2. Gradient Computation
 
@@ -41,8 +35,6 @@ Input frames are converted from BGR to grayscale to reduce computational cost an
 * High-threshold binary mask is generated to isolate strong contrast regions
 
 This step highlights sharp intensity transitions corresponding to object boundaries.
-
----
 
 ### 3. Connected Component Extraction
 
@@ -59,8 +51,6 @@ For each connected component:
 * Basic statistics
 
 are extracted efficiently without per-pixel scanning.
-
----
 
 ### 4. Skyline Detection
 
@@ -81,15 +71,11 @@ This significantly reduces false positives from:
 * Poles
 * Terrain structures
 
----
-
 ### 5. Region Grouping
 
 Spatially close bounding boxes are merged if their center distance is below a configurable threshold.
 
 This helps combine fragmented detections of the same object.
-
----
 
 ### 6. Isolation Filtering
 
@@ -102,8 +88,6 @@ This reduces false positives caused by:
 * High-contrast vertical structures
 * Edge fragments from large objects
 
----
-
 ## Requirements
 
 * C++17 or newer
@@ -114,8 +98,6 @@ Tested on:
 * Windows 11
 * MSVC / Clang
 * OpenCV 4.x
-
----
 
 ## Example Usage
 
@@ -131,7 +113,7 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    ObjectDetector detector(1920, 1080);
+    ObjectDetector detector;
     cv::Mat frame;
 
     while (true) {
@@ -157,20 +139,16 @@ int main(int argc, char **argv)
     return 0;
 }
 ```
----
 
 ## Parameters
 
 | Parameter           | Description                                                 |
 | ------------------- | ----------------------------------------------------------- |
-| `width`             | Expected frame width (used for internal buffer allocation)  |
-| `height`            | Expected frame height (used for internal buffer allocation) |
-| `high_threshold`    | Threshold for strong gradient mask                          |
-| `threshold_high `   | Threshold for isolation filtering                           |
+| `threshold_high`    | Threshold for strong gradient mask                          |
+| `threshold_low`     | Threshold for isolation filtering                           |
 | `gdist`             | Maximum distance for merging regions                        |
 | `smf`               | Skyline margin factor (skyline_margin = _height / smf)      |
 
----
 
 ## Performance Notes
 

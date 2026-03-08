@@ -33,8 +33,7 @@ public:
     };
 
 public:
-    explicit ObjectDetector(int fwidth, int fheight, 
-                int treshold_low = 150, int threshold_high = 200, int gdist = 100, int smf = 20);
+    explicit ObjectDetector(int threshold_high = 200, int treshold_low = 150, int gdist = 100, int smf = 20);
 
     std::vector<cv::Rect2i> process_frame(cv::Mat& frame);
 

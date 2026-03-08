@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
     cv::Mat frame;
 
-    ObjectDetector detector(1920, 1080);
+    ObjectDetector detector;
     double start;
     while (true) {
         start = current_time();
@@ -48,7 +48,8 @@ int main(int argc, char **argv)
 
         double frame_time = current_time() - start;
         double current_fps = 1.0 / frame_time;
-        fps = 0.98 * fps + 0.02 * current_fps; // Exponential moving average for FPS
+        double alpha = 0.02; // Smoothing factor for the moving average
+        fps = alpha * current_fps + (1 - alpha) * fps; // Exponential moving average for FPS
 
         std::string fpstext{"FPS: "};
         fpstext += std::to_string((int)fps);

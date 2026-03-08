@@ -7,12 +7,10 @@
 #include <algorithm>
 #include <cmath>
 
-ObjectDetector::ObjectDetector(int fwidth, int fheight, int treshold_low, int threshold_high, int gdist, int smf)
-    : _width(fwidth), _height(fheight), _threshold_low(treshold_low), _threshold_high(threshold_high),
+ObjectDetector::ObjectDetector(int threshold_high, int treshold_low, int gdist, int smf)
+    : _threshold_high(threshold_high), _threshold_low(treshold_low),
         _skyline_margin_factor(smf), _grouping_distance(gdist)
-{
-    _skyline.resize(fwidth / _rf);
-}
+{}
 
 bool ObjectDetector::check_distance(const Box4c& b1, const Box4c& b2)
 {
