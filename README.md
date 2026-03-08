@@ -104,12 +104,6 @@ Several extensions could further improve robustness and detection quality:
 * C++17 or newer
 * OpenCV 4.x
 
-Tested on:
-
-* Windows 11
-* MSVC / Clang
-* OpenCV 4.x
-
 ## Example Usage
 
 ```cpp
