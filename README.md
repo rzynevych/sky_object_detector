@@ -88,6 +88,17 @@ This reduces false positives caused by:
 * High-contrast vertical structures
 * Edge fragments from large objects
 
+## Possible Improvements
+
+Several extensions could further improve robustness and detection quality:
+
+* **Temporal filtering** to enforce detection consistency across frames.
+* **Motion-based filtering** to suppress static background structures.
+* **Adaptive gradient thresholds** to better handle varying lighting conditions.
+* **Morphological preprocessing** to reduce noise before connected component extraction.
+* **More efficient region grouping** using spatial indexing structures.
+* **Multi-scale detection** to improve sensitivity to small or distant objects.
+
 ## Requirements
 
 * C++17 or newer
