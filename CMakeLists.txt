@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(OpenCVTest)
+project(SkyObjectDetector)
 
 # set(OpenCV_DIR "/home/ubuntu/libs/opencv-4.12")
 set(OpenCV_DIR "C:\\lib\\opencv-4.12.0\\build\\x64\\vc16\\lib")
@@ -14,6 +14,6 @@ set(SRC
     src/main.cpp
 )
 
-add_executable(OpenCVTest ${SRC})
-target_compile_options(OpenCVTest PRIVATE /O2)
-target_link_libraries(OpenCVTest ${OpenCV_LIBS})
+add_executable(SkyObjectDetector ${SRC})
+target_compile_options(SkyObjectDetector PRIVATE /O2)
+target_link_libraries(SkyObjectDetector ${OpenCV_LIBS})

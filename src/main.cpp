@@ -5,20 +5,18 @@
 
 int main(int argc, char **argv) 
 {
-    static double fps = 0.0;
-
-    // if (argc < 2) {
-    //     std::cout << "Usage: " << argv[0] << " <video_file_name>" << std::endl; 
-    //     return 0;
-    // }
+    if (argc < 2) {
+        std::cout << "Usage: " << argv[0] << " <video-file-name>" << std::endl; 
+        return 0;
+    }
 
     std::cout << "Start" << std::endl;
     
-    // char *filename = argv[1];
+    char *filename = argv[1];
 
     // Open the video file
-    // cv::VideoCapture cap("rtspsrc location=rtsp://192.168.1.65:8554/my_video latency=0 ! rtph264depay ! h264parse ! mppvideodec format=BGR ! appsink drop=True sync=False", cv::CAP_GSTREAMER); // replace with your video path
-    cv::VideoCapture cap("D:\\Libraries\\Videos\\output.mp4"); // replace with your video path
+    // cv::VideoCapture cap("rtspsrc location=rtsp://192.168.1.65:8554/my_video latency=0 ! rtph264depay ! h264parse ! mppvideodec format=BGR ! appsink drop=True sync=False", cv::CAP_GSTREAMER);
+    cv::VideoCapture cap(filename);
 
     // Check if the video was successfully opened
     if (!cap.isOpened()) {
@@ -26,10 +24,16 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    cv::Mat frame;
+    ObjectDetector detector(
+        220, // threshold_high
+        80, // threshold_low
+        100, // grouping_distance
+        40 // skyline_margin_factor
+    );
 
-    ObjectDetector detector;
+    cv::Mat frame;
     double start;
+    double fps = 0.0;
     while (true) {
         start = current_time();
         cap >> frame; // read the next frame

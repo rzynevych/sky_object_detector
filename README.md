@@ -1,6 +1,6 @@
 # Object Detection Using Gradient & Skyline Filtering
 
-**C++ / OpenCV | Real-Time | Lightweight**
+[![Demo](media/demo.gif)](https://www.youtube.com/watch?v=FDf00D14dVw)
 
 ## Overview
 
@@ -106,6 +106,14 @@ Several extensions could further improve robustness and detection quality:
 
 ## Example Usage
 
+* Build and run the project:
+```bash
+cmake -B build
+cmake --build build
+./build/SkyObjectDetector <video-file-name>
+```
+* Or include ObjectDetector class in your project:
+
 ```cpp
 #include "ObjectDetector.hpp"
 
@@ -118,9 +126,14 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    ObjectDetector detector;
-    cv::Mat frame;
+    ObjectDetector detector(
+        220, // threshold_high
+        80, // threshold_low
+        100, // grouping_distance
+        40 // skyline_margin_factor
+    );
 
+    cv::Mat frame;
     while (true) {
         cap >> frame;
 
